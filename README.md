@@ -1,3 +1,37 @@
-# Text-to-Speech
-TTS is being used more and more frequently, from smartphone and car navigation systems to virtual assistants like Siri and Alexa.
-Any text can be turned into voice using the text-to-speech technique. The text-to-speech project converts words on digital devices into sounds with the touch of a button or finger. The Python Text to Speech project is highly beneficial for those who have reading difficulties.
+from tkinter import *
+from gtts import gTTS
+from playsound import playsound
+
+root = Tk()
+root.geometry('350x300')
+root.resizable(0,0)
+root.config(bg = 'ghost white')
+root.title('KP - TEXT_TO_SPEECH')
+
+Label(root, text = 'TEXT_TO_SPEECH' , font='arial 20 bold' , bg ='white smoke').pack()
+Label(root, text ='KP' , font ='arial 15 bold', bg = 'white smoke').pack(side = BOTTOM)
+
+Label(root, text ='Enter Text', font ='arial 15 bold', bg ='white smoke').place(x=20,y=60)
+
+Msg = StringVar()
+
+entry_field = Entry(root,textvariable =Msg, width ='50')
+entry_field.place(x=20 , y=100)
+
+def Text_to_speech():
+    Message = entry_field.get()
+    speech = gTTS(text = Message)
+    speech.save('KP.mp3')
+    playsound('KP.mp3')
+
+def Exit():
+    root.destroy()
+
+def Reset():
+    Msg.set("")
+
+Button(root, text = "PLAY" , font = 'arial 15 bold', command = Text_to_speech, width =4).place(x=25, y=140)
+Button(root,text = 'EXIT',font = 'arial 15 bold' , command = Exit, bg = 'OrangeRed1').place(x=100,y=140)
+Button(root, text = 'RESET', font='arial 15 bold', command = Reset).place(x=175 , y =140)
+
+root.mainloop()
